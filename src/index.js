@@ -1,21 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
-import App from './components/app';
-import SignIn from './components/auth/signin';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
+import Routes from './router';
+//import '../styles/styles.css';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const App = () => {
+  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHistory}>
-		<Route path='/' component={App}>
-			<Route path='signin' component={SignIn} />
-		</Route>
-    </Router>
-  </Provider>
-  , document.querySelector('.container'));
+  return (
+    <Provider store={store}>
+      <Routes />
+    </Provider>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
