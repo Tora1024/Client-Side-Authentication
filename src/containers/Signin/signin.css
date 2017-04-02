@@ -1,7 +1,31 @@
-.form-group {
-	border: 10px solid black;
+.form_container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
-.submit-button {
-	color: blue;
+.input_group {
+	display: flex;
+	flex-flow: inherit;
+	border: 0;
+	width: 300px;
+}
+
+.input_group input {
+  border-radius: 5px;
+  border: 1px solid #337ab7;
+  width: 100%;
+  margin: 10px 0;
+  height: 25px;
+  font-size: 16px;
+}
+
+.submit_button {
+	display: flex;
+	border: 0;
+	color: white;
+	font-size: 16px;
+	background-color: #337ab7;
+	padding: 10px;
+	border-radius: 5px; 
 }

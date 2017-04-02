@@ -9,10 +9,13 @@ class Home extends Component {
       <div styleName='container'>
 				<Header />
 				{this.props.children}
-				<h1>hola</h1>
       </div>
 	);
   }
 }
+
+Home.propTypes = {
+  children: React.PropTypes.object
+};
 
 export default CSSModules(Home, styles);

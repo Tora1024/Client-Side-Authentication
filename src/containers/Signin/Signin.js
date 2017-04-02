@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import styles from './signin.css';
 
 class Signin extends Component {
@@ -9,27 +9,33 @@ class Signin extends Component {
 	}
 
   render () {
-		const { handleSubmit, fields: { email, password }} = this.props;
+		const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-				<fieldset>
+      <form className={styles.form_container} onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+
+				<fieldset className={styles.input_group}>
 					<label>Email: </label>
-					<input {...email} type="text" />
+					<Field name="email" component="input" />
 				</fieldset>
-				<fieldset>
+
+				<fieldset className={styles.input_group}>
 					<label>Password: </label>
-					<input {...password} type="text" />
+					<Field name="password" component="input" />
 				</fieldset>
-				<button action="submit" >Sign in</button>
+
+				<button action="submit" className={styles.submit_button}>Sign in</button>
       </form>
 		);
   }
 }
 
+Signin.propTypes = {
+  handleSubmit: React.PropTypes.func
+};
+
 const exportSignIn = reduxForm({
-	form: 'signin',
-	fields: ['email', 'password']
+	form: 'signin'
 })(Signin);
 
 export default CSSModules(exportSignIn, styles);
