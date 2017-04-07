@@ -1,6 +1,8 @@
 .form_container {
 	display: flex;
+	flex: 2;
 	align-items: center;
+	justify-content: center;
 	flex-direction: column;
 }
 
@@ -28,4 +30,13 @@
 	background-color: #337ab7;
 	padding: 10px;
 	border-radius: 5px; 
+}
+
+.submit_button:hover {
+  background-color: #4c91cd;
+  cursor: pointer;
+}
+
+.submit_button:active {
+  background-color: #275d8b;
 }

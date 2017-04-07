@@ -6,7 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const VENDOR_LIBS = [
 	'react', 'react-dom', 'react-redux', 
-	'react-router', 'redux', 'redux-thunk'
+	'react-router', 'redux', 'redux-thunk', 'redux-form', 'axios'
 ];
 
 module.exports = {
@@ -21,8 +21,13 @@ module.exports = {
   module: {
     rules: [
       {
-        use: 'babel-loader',
-        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-1', 'react']
+          }
+        },
+        test: /\.jsx?$/,
         exclude: /node_modules/
       },
       {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import CSSModules from 'react-css-modules';
 import { reduxForm, Field } from 'redux-form';
 import styles from './signin.css';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 
 class Signin extends Component {
 	handleFormSubmit({ email, password }) {
-		console.log(email, password);
+		this.props.signinUser({ email, password });
 	}
 
   render () {
@@ -31,11 +32,21 @@ class Signin extends Component {
 }
 
 Signin.propTypes = {
-  handleSubmit: React.PropTypes.func
+  handleSubmit: React.PropTypes.func,
+  signinUser: React.PropTypes.func
 };
 
-const exportSignIn = reduxForm({
+/*export default reduxForm({
 	form: 'signin'
+}, null, actions)(Signin);
+*/
+
+//This was a workaround needed in order to implement this. 
+//Seems like redux-form 6 and up is completely rewritten, and still 
+//getting in the way of other things, like getting actions into props.
+
+Signin = reduxForm({
+  form: 'signin'
 })(Signin);
 
-export default CSSModules(exportSignIn, styles);
+export default Signin = connect(null, actions)(Signin);
