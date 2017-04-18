@@ -7,6 +7,7 @@ import NotFound from './containers/404/404';
 
 import Signin from './containers/Signin/Signin';
 import Signout from './containers/Signout/Signout';
+import Signup from './containers/Signup/Signup';
 
 const Routes = () => {
   return (
@@ -14,6 +15,7 @@ const Routes = () => {
       <Route path="/" component={Home} > 
 				<Route path='signin' component={Signin}/>
 				<Route path='signout' component={Signout}/>
+        <Route path='signup' component={Signup}/>
 				<Route path="about" component={About} />
       </Route>
 
