@@ -6,12 +6,14 @@ import About from './containers/About/About';
 import NotFound from './containers/404/404';
 
 import Signin from './containers/Signin/Signin';
+import Signout from './containers/Signout/Signout';
 
 const Routes = () => {
   return (
     <Router history={hashHistory}>
       <Route path="/" component={Home} > 
 				<Route path='signin' component={Signin}/>
+				<Route path='signout' component={Signout}/>
 				<Route path="about" component={About} />
       </Route>
 

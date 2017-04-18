@@ -40,3 +40,8 @@
 .submit_button:active {
   background-color: #275d8b;
 }
+
+.error_message {
+	padding-bottom: 10px;
+	color: red;
+}

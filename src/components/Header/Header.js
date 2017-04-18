@@ -1,19 +1,55 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 import CSSModules from 'react-css-modules';
 import styles from './header.css';
+import { Link } from 'react-router';
 
 class Header extends Component {
+  renderSigninText() {
+    //console.log(typeof this.props.auth);
+    if (this.props.auth && (typeof this.props.auth !== 'undefined')) {
+      return (
+        <ul>
+          <li>
+            <Link to="/signout" styleName="navbar_link">Sign out</Link>
+          </li>
+        </ul>
+      );
+    } else {
+      return (
+        <ul>
+          <li>
+            <Link to="/signin" styleName="navbar_link">Sign in</Link>
+          </li>
+          <li>
+            <Link to="/signup" styleName="navbar_link">Sign up</Link>
+          </li>
+        </ul>
+      );
+    }
+  }
+
   render () {
     return (
       <nav styleName='navbar'>
-        <ul>
-					<li>
-						Sign in
-					</li>
-        </ul>
+        <Link to="/" styleName="navbar_link">Home</Link>
+        
+					
+            { this.renderSigninText() }
+					
+        
       </nav>
 		);
   }
 }
 
-export default CSSModules(Header, styles);
+Header.propTypes = {
+  //auth: React.PropTypes.boolean
+};
+
+function mapStateToProps(state) {
+  return { auth: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps, actions)(CSSModules(Header, styles));

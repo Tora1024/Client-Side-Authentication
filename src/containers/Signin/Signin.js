@@ -9,6 +9,16 @@ class Signin extends Component {
 		this.props.signinUser({ email, password });
 	}
 
+	renderAlert() {
+		if (this.props.errorMessage ) {
+			return (
+				<div className={styles.error_message}>
+					<strong>Oopps!</strong> { this.props.errorMessage }
+				</div>
+			);
+		}
+	}
+
   render () {
 		const { handleSubmit } = this.props;
 
@@ -22,9 +32,10 @@ class Signin extends Component {
 
 				<fieldset className={styles.input_group}>
 					<label>Password: </label>
-					<Field name="password" component="input" />
+					<Field name="password" type="password" component="input" />
 				</fieldset>
 
+				{ this.renderAlert() }
 				<button action="submit" className={styles.submit_button}>Sign in</button>
       </form>
 		);
@@ -33,8 +44,13 @@ class Signin extends Component {
 
 Signin.propTypes = {
   handleSubmit: React.PropTypes.func,
-  signinUser: React.PropTypes.func
+  signinUser: React.PropTypes.func,
+  errorMessage: React.PropTypes.string
 };
+
+function mapStateToProps(state) {
+	return { errorMessage: state.auth.error };
+}
 
 /*export default reduxForm({
 	form: 'signin'
@@ -49,4 +65,4 @@ Signin = reduxForm({
   form: 'signin'
 })(Signin);
 
-export default Signin = connect(null, actions)(Signin);
+export default Signin = connect(mapStateToProps, actions)(Signin);
