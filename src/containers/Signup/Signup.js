@@ -12,6 +12,17 @@ class Signup extends Component {
 		this.props.signupUser({ email, password, passwordConfirm });
 	}
 
+	renderAlert() {
+
+		if (this.props.errorMessage ) {
+			return (
+				<div className={styles.error_message}>
+					<strong>Oopps!</strong> { this.props.errorMessage }
+				</div>
+			);
+		}
+	}
+
 	render() {
 		const { handleSubmit } = this.props;
 
@@ -24,6 +35,7 @@ class Signup extends Component {
 
 				<Field name="passwordConfirm" type="password" component={renderField} label="Confirm Password:" />
 
+				{ this.renderAlert() }
 				<button action="submit" className={styles.submit_button}>Sign in</button>
       </form>
 		);
@@ -32,11 +44,12 @@ class Signup extends Component {
 
 Signup.propTypes = {
   handleSubmit: React.PropTypes.func,
-  signupUser: React.PropTypes.func
+  signupUser: React.PropTypes.func,
+  errorMessage: React.PropTypes.string
 };
 
 function mapStateToProps(state) {
-	return { user: state.user };
+	return { errorMessage: state.auth.error };
 }
 
 const form = reduxForm({
