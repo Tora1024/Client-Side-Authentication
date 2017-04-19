@@ -3,6 +3,8 @@ import { reduxForm, Field } from 'redux-form';
 import styles from './signin.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
+import renderField from './Render_Field';
+import validate from './Validate';
 
 class Signin extends Component {
 	handleFormSubmit({ email, password }) {
@@ -25,15 +27,9 @@ class Signin extends Component {
     return (
       <form className={styles.form_container} onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
-				<fieldset className={styles.input_group}>
-					<label>Email: </label>
-					<Field name="email" component="input" />
-				</fieldset>
+				<Field name="email" type="email" component={renderField} label="Email:" />
 
-				<fieldset className={styles.input_group}>
-					<label>Password: </label>
-					<Field name="password" type="password" component="input" />
-				</fieldset>
+				<Field name="password" type="password" component={renderField} label="Password:" />
 
 				{ this.renderAlert() }
 				<button action="submit" className={styles.submit_button}>Sign in</button>
@@ -52,17 +48,9 @@ function mapStateToProps(state) {
 	return { errorMessage: state.auth.error };
 }
 
-/*export default reduxForm({
-	form: 'signin'
-}, null, actions)(Signin);
-*/
+const form = reduxForm({
+  form: 'signin',
+  validate
+});
 
-//This was a workaround needed in order to implement this. 
-//Seems like redux-form 6 and up is completely rewritten, and still 
-//getting in the way of other things, like getting actions into props.
-
-Signin = reduxForm({
-  form: 'signin'
-})(Signin);
-
-export default Signin = connect(mapStateToProps, actions)(Signin);
+export default connect(mapStateToProps, actions)(form(Signin));

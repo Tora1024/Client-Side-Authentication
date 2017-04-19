@@ -6,14 +6,13 @@ import * as actions from '../../actions/index';
 import renderField from './Render_Field';
 import validate from './Validate';
 
-
 class Signup extends Component {
+	
 	handleFormSubmit({ email, password, passwordConfirm }) {
 		this.props.signupUser({ email, password, passwordConfirm });
 	}
 
 	renderAlert() {
-
 		if (this.props.errorMessage ) {
 			return (
 				<div className={styles.error_message}>
