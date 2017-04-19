@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
 
 const API_URL = 'http://localhost:3090';
@@ -14,7 +14,7 @@ export function signinUser({ email, password }) {
 				//Save JWT token
 				localStorage.setItem('token', response.data.token);
 				//Redirect to the route '/feature'
-				browserHistory.push('/feature');
+				hashHistory.push('/feature');
 			})
 			.catch(() => {
 				dispatch(authError('Bad Login Info'));
@@ -37,7 +37,7 @@ export function signupUser ({email, password}) {
 				
 				localStorage.setItem('token', response.data.token);
 
-				browserHistory.push('/feature');
+				hashHistory.push('/feature');
 			})
 			.catch((error) => {
 				dispatch(authError(error.response.data.error));

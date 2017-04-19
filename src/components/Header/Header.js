@@ -34,11 +34,7 @@ class Header extends Component {
     return (
       <nav styleName='navbar'>
         <Link to="/" styleName="navbar_link">Home</Link>
-        
-					
-            { this.renderSigninText() }
-					
-        
+            { this.renderSigninText() }	
       </nav>
 		);
   }
