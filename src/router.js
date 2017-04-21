@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute, Redirect } from 'react-router';
 
 import Home from './containers/Home/Home';
 import About from './containers/About/About';
@@ -15,7 +15,7 @@ import RequireAuth from './HOC/Auth/Require_Auth';
 
 const Routes = () => {
   return (
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <Route path="/" component={Home} >
         <IndexRoute component={Welcome} />
 				<Route path='signin' component={Signin}/>
@@ -25,7 +25,8 @@ const Routes = () => {
 				<Route path="about" component={About} />
       </Route>
 
-      <Route path='*' component={NotFound} />
+      <Route path='/404' component={NotFound} />
+      <Redirect from='*' to='/404' />
     </Router>
   );
 };

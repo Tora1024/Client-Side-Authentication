@@ -7,10 +7,12 @@ import { Link } from 'react-router';
 
 class Header extends Component {
   renderSigninText() {
-    //console.log(typeof this.props.auth);
     if (this.props.auth && (typeof this.props.auth !== 'undefined')) {
       return (
         <ul>
+          <li>
+            <Link to="/feature" styleName="navbar_link">Feature</Link>
+          </li>
           <li>
             <Link to="/signout" styleName="navbar_link">Sign out</Link>
           </li>
