@@ -61,5 +61,9 @@ module.exports = {
       allChunks: true
     }),
     new DuplicatePackageCheckerPlugin()
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
+  }
 };
